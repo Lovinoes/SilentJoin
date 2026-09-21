@@ -1,0 +1,22 @@
+# SilentJoin
+# apply changes with /silentjoin reload
+
+# true  = vanilla join/leave/name-change messages are replaced by the ones below
+# false = plugin does nothing (vanilla messages)
+enabled: true
+
+# Messages use MiniMessage: https://docs.advntr.dev/minimessage/format.html
+# Empty '' = no message. Keep messages in single quotes.
+# Placeholders:
+# <player>     display name,
+# <name>       username,
+# <old_name>   previous username (renamed only)
+#
+# Example: 
+# message: '<yellow><player> joined the game'
+
+join:
+  message: ''           # player joins
+  renamed-message: ''   # player joins after a name change (empty = no message)
+quit:
+  message: ''           # player leaves or is kicked
