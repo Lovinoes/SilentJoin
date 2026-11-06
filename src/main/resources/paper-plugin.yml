@@ -4,5 +4,5 @@ main: de.lovinoes.silentjoin.SilentJoin
 description: truly the best paper plugin to hide and customize the join, leave and name-change messages.
 author: Lovinoes
 website: https://github.com/Lovinoes/SilentJoin
-api-version: '26.2'
+api-version: '26.3'
 folia-supported: true

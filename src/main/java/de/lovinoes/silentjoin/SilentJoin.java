@@ -34,6 +34,7 @@ public final class SilentJoin extends JavaPlugin implements Listener {
     private static final String RELOAD_PERMISSION = "silentjoin.reload";
     private record Settings(boolean enabled, String join, String joinRenamed, String quit) {}
     private volatile Settings settings = new Settings(true, "", "", "");
+    private final Object reloadLock = new Object();
 
     @Override
     public void onEnable() {
@@ -107,12 +108,20 @@ public final class SilentJoin extends JavaPlugin implements Listener {
     }
 
     private void reload(CommandSender sender) {
-        saveDefaultConfig();
-        try {
-            settings = loadSettings();
+        boolean success = false;
+        synchronized (reloadLock) {
+            saveDefaultConfig();
+            try {
+                settings = loadSettings();
+                success = true;
+            } catch (IOException | InvalidConfigurationException e) {
+                getLogger().log(Level.SEVERE, "Could not reload config.yml, keeping previous settings", e);
+            }
+        }
+
+        if (success) {
             sender.sendMessage(Component.text("SilentJoin config reloaded.", NamedTextColor.GREEN));
-        } catch (IOException | InvalidConfigurationException e) {
-            getLogger().log(Level.SEVERE, "Could not reload config.yml, keeping previous settings", e);
+        } else {
             sender.sendMessage(Component.text(
                     "Could not read config.yml, keeping the previous settings. See the console for details.",
                     NamedTextColor.RED));
