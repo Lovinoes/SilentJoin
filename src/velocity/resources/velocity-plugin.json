@@ -1,0 +1,9 @@
+{
+  "id": "silentjoin",
+  "name": "SilentJoin",
+  "version": "${version}",
+  "description": "truly the best plugin to hide and customize the join, leave and server-switch messages.",
+  "url": "https://github.com/Lovinoes/SilentJoin",
+  "authors": ["Lovinoes"],
+  "main": "de.lovinoes.silentjoin.velocity.SilentJoinVelocity"
+}

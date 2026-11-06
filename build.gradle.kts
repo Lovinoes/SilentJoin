@@ -11,8 +11,11 @@ repositories {
     }
 }
 
+val velocity: SourceSet = sourceSets.create("velocity")
+
 dependencies {
     compileOnly("io.papermc.paper:paper-api:26.3.build.+")
+    "velocityCompileOnly"("com.velocitypowered:velocity-api:4.2.0")
 }
 
 java {
@@ -21,4 +24,16 @@ java {
 
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
+}
+
+tasks.withType<ProcessResources> {
+    val pluginVersion = version.toString()
+    inputs.property("version", pluginVersion)
+    filesMatching(listOf("paper-plugin.yml", "velocity-plugin.json")) {
+        expand("version" to pluginVersion)
+    }
+}
+
+tasks.jar {
+    from(velocity.output)
 }

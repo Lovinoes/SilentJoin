@@ -1,0 +1,24 @@
+# SilentJoin (Velocity)
+# apply changes with /silentjoinproxy reload
+#
+# Install SilentJoin on every backend server as well and keep its messages empty,
+# so only the proxy announces joins, leaves and server switches to the whole network.
+
+# true  = the messages below are sent to every player on the network
+# false = plugin does nothing
+enabled: true
+
+# Messages use MiniMessage: https://docs.advntr.dev/minimessage/format.html
+# Empty '' = no message. Keep messages in single quotes.
+# Placeholders:
+# <player>            username (the proxy has no display names)
+# <name>              username
+# <server>            server the player joined, switched to or left from
+# <previous_server>   server the player came from (switch only)
+
+join:
+  message: '<yellow><player> joined the network'                                # player joins the network
+switch:
+  message: '<yellow><player> switched from <previous_server> to <server>'       # player moves to another server
+quit:
+  message: '<yellow><player> left the network'                                  # player leaves the network
